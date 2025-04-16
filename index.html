@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tavoli Disponibili</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Taverna San Cristoforo</h1>
+
+        <div class="top_bar">
+            <button class="buttonReset">reset</button>
+            <div class="counter">Posti Disponibili: <span id="counter">0</span></div>
+        </div>
+  
+        <div class="tables-container">
+            <div class="tables" id="tables"></div>
+        </div>
+    </div>
+    <script>
+        function createTable(name, seats) {
+            return `
+                <div class="table" data-seats="${seats}">
+                    <div class="table-name">${name}</div>
+                    <span class="seats">${seats}</span>
+                    <div class="controls">
+                        <button class="increment" onmousedown="startIncrement(this)" onmouseup="stopIncrement()" onmouseleave="stopIncrement()">+</button>
+                        <button class="decrement" onmousedown="startDecrement(this)" onmouseup="stopDecrement()" onmouseleave="stopDecrement()">-</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateTables() {
+            const tablesContainer = document.getElementById('tables');
+            let tableHtml = '';
+            tableHtml += '<div class="spacer"></div>';
+
+            // Definizione dei tavoli con posti e nomi specifici
+            const tables = [
+                { number: 1, seats: 8 },
+                { number: 2, seats: 8 },
+                { number: 3, seats: 16 },
+                { number: 4, seats: 8 },
+                { number: 5, seats: 8 },
+                { number: 6, seats: 8 },
+                { number: 7, seats: 8 },
+                { number: 8, seats: 8 },
+                { number: 9, seats: 8 },
+                { number: 10, seats: 16 },
+                { number: 11, seats: 16 },
+                { number: 12, seats: 8 },
+                { number: 13, seats: 8 },
+                { number: 14, seats: 8 },
+                { number: 15, seats: 16 },
+                { number: 16, seats: 16 },
+                { number: 17, seats: 16 },
+                { number: 18, seats: 16 },
+                { number: 19, seats: 16 }
+            ];
+            
+            
+
+            // Generazione dei tavoli
+            tables.forEach(table => {
+                tableHtml += createTable(`Tavolo ${table.number}`, table.seats);
+            });
+
+            tableHtml += '<div class="spacer"></div>';
+
+            // 2 tables with 16 seats each (Tavolo 1I, Tavolo 2I)
+            for (let i = 1; i <= 2; i++) {
+                tableHtml += createTable(`Tavolo ${i}-I`, 16);
+            }
+
+            // 3 tables with 8 seats each (Tavolo 3I to Tavolo 5I)
+            for (let i = 3; i <= 5; i++) {
+                tableHtml += createTable(`Tavolo ${i}-I`, 8);
+            }
+
+            tablesContainer.innerHTML = tableHtml;
+            updateCounter();
+        }
+
+        document.addEventListener('DOMContentLoaded', generateTables);
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

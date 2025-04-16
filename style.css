@@ -1,0 +1,251 @@
+/* Rimuoviamo l'overflow hidden dal body per consentire lo scrolling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0px;
+    padding: 20px;
+    padding-top: 0px;
+    overflow: hidden; /* Consentiamo lo scrolling */
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    background: #fff;
+    background-image: url('STEMMA-SAN-CRISTOFORO.png'); /* Percorso dell'immagine */
+    background-position: center; /* Centra l'immagine */
+    background-size: contain;
+    background-repeat: no-repeat; /* Non ripete l'immagine */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-height: 94vh;
+    max-width: 95vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}
+
+body::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(25px);
+    border-radius: 20px;
+    background-color: rgb(245, 245, 244);
+    background-image: radial-gradient(at 47% 69%, rgb(248, 174, 142) 0px, transparent 50%),
+    radial-gradient(at 9% 32%,rgb(209, 230, 240) 0px, transparent 50%);
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15spx;
+    color: #444;
+    background-color:white;
+    border: solid 1px black;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 5px 5px rgba(34, 200, 251, 0.783);
+}
+
+.top_bar {
+    display: flex;
+    position: relative;
+    z-index: 10;
+    align-items: center; /* Allinea verticalmente */
+    justify-content: space-between; /* Distribuisce gli elementi */
+    gap: 10px; /* Aggiunge spazio tra gli elementi */
+    width: 100%;
+    height: 100px;
+    flex-wrap: nowrap; /* Evita che gli elementi vadano su due righe */
+}
+
+.buttonReset {
+    flex: 0; /* Evita che si allarghi troppo */
+    width: auto; /* Occupa solo lo spazio necessario */
+    padding: 10px 20px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    background-color: rgba(34, 200, 251, 0.783);
+    border: solid 1px black;
+    font-size: 24px;
+    color: #FFFFFF;
+    border-radius: 10px;
+    transition-duration: 0s;
+    text-decoration: none;
+    /*overflow: hidden;*/
+    cursor: pointer;
+}
+
+.buttonReset:hover{
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+  
+.buttonReset:after {
+    content: "";
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 100%;
+    padding-left: 100%;
+    margin-left: -10px !important;
+    margin-top: -20%;
+    opacity: 0;
+    transition: all 0.3s
+}
+  
+.buttonReset:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+.counter {
+    flex: 1; 
+    max-width: 60%;
+    margin-right: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    background-color: white;
+    border: solid 1px black;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 5px rgba(34, 200, 251, 0.783);
+}
+
+#counter {
+    font-size: 24px;  /* Dimensione del testo */
+    font-weight: bold; /* Grassetto */
+}
+
+.tables-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 70vh;
+    padding-right: 15px;
+    margin-right: -15px;
+}
+
+.tables {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 10px;
+}
+
+.table {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    background-color: white;
+    border: 2px solid rgb(104, 122, 126);
+    border-radius: 10px;
+    box-shadow: 0 0 20px 10px rgba(167, 167, 153, 0.5);
+    transition: background-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.table:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.table.active {
+    background-color: red;
+    color: white;
+}
+
+.seats {
+    position: absolute;
+    top: 10px;
+    text-align: center;
+}
+
+.controls {
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    width: 100%;
+    flex-direction: row-reverse;
+}
+
+.controls button {
+    flex: 1; /* Ogni pulsante occupa metà della larghezza del contenitore .controls */
+    padding: 5px 0;
+    border: 1px solid rgb(7, 196, 253);
+    cursor: pointer;
+    font-size: 24px;
+    transition: all 0.3s;
+}
+
+.decrement {
+    background-color: white; /* Colore per il pulsante "−" */
+    color: black;
+}
+
+.increment {
+    background-color: white; /* Colore per il pulsante "+" */
+    color: black;
+}
+
+.controls button:hover {
+    opacity: 0.8;
+}
+
+button:active {
+    background-color: #666;
+}
+
+.table-name {
+    font-weight: bold;
+    margin-bottom: 3px; /* Aggiungiamo spazio inferiore */
+    text-align: center;
+    font-size: 0.8em; /* Riduciamo le dimensioni */
+}
+
+.seats {
+    font-size: 0.8em; /* Riduciamo le dimensioni */
+}
+
+.spacer {
+    width: 100%;
+    height: 15px; /* Regoliamo l'altezza come necessario */
+    background: transparent; /* Assicuriamo che sia invisibile */
+    grid-column: span 3; /* Assicuriamo che si estenda su tutte le colonne */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .tables {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tables-container {
+        max-height: 80vh;
+    }
+}
