@@ -39,7 +39,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+const socket = new WebSocket("ws://localhost:3000"); // Usa ws://IP_DEL_SERVER:3000 se è online
 
+socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    // Applica le modifiche ricevute
+    aggiornaPagina(data);
+};
+
+function inviaModifica(modifica) {
+    socket.send(JSON.stringify(modifica));
+}
 
 
 
