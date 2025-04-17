@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-const socket = new WebSocket("ws://localhost:3000"); // Usa ws://IP_DEL_SERVER:3000 se è online
+const socket = new WebSocket("ws://gestionetavolitaverna-production.up.railway.app"); // Usa ws://IP_DEL_SERVER:3000 se è online
 
 socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
