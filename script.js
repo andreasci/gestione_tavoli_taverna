@@ -32,11 +32,25 @@ function resetTables() {
 // Aggiungi l'evento al pulsante reset
 document.addEventListener('DOMContentLoaded', () => {
     generateTables();
-    loadTableState(); 
-    saveInitialTableState(); // Salva lo stato iniziale appena i tavoli sono generati
+    loadTableState();
+    saveInitialTableState();
 
-    document.querySelector('.buttonReset').addEventListener('click', resetTables);
+    document.querySelector('.buttonReset').addEventListener('click', () => {
+        // Salva la pagina corrente da tornare indietro se serve
+        sessionStorage.setItem('returningFromConfirmation', 'true');
+        window.location.href = "confirm-reset.html";
+    });
 });
+
+// Se torni dalla conferma con "Sì"
+if (sessionStorage.getItem('confirmedReset') === 'true') {
+    resetTables();
+    sessionStorage.removeItem('confirmedReset');
+}
+
+
+
+
 
 
 const socket = new WebSocket("wss://gestionetavolitaverna-production.up.railway.app"); 
@@ -50,6 +64,9 @@ socket.onmessage = (event) => {
 function inviaModifica(modifica) {
     socket.send(JSON.stringify(modifica));
 }
+
+
+
 
 
 
