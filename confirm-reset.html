@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferma Reset</title>
+    <link rel="stylesheet" href="confirm-style.css">
+</head>
+<body>
+    <div class="confirm-container">
+        <h2>Sei sicuro di voler resettare i tavoli?</h2>
+        <div class="buttons">
+            <button class="yes" onclick="confermaReset()">Sì</button>
+            <button class="no" onclick="annullaReset()">No</button>
+        </div>
+    </div>
+
+    <script>
+        function confermaReset() {
+            sessionStorage.setItem('confirmedReset', 'true');
+            window.location.href = "index.html"; // Torna alla pagina principale
+        }
+
+        function annullaReset() {
+            window.location.href = "index.html"; // Torna indietro senza fare nulla
+        }
+    </script>
+</body>
+</html>
